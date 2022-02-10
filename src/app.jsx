@@ -1,22 +1,9 @@
 import { useState } from 'preact/hooks';
+import IntroductionComponent from './components/IntroductionComponent';
+import useCounter from './components/hooks/useCounterHook';
+import CustomButton from './components/hooks/CustomButton';
 
-function IntroductionComponent({ name = 'unknown' }) {
-  return <p>my name is {name}</p>;
-}
-
-//speicial custom hook
-function useCounter() {
-  const [value, setValue] = useState(0);
-  const Increment = () => {
-    setValue(value + 1);
-  };
-
-  return {
-    value,
-    Increment,
-  };
-}
-export default function App(props) {
+export default function App() {
   const [message, setMessage] = useState('Hello World');
   const { value, Increment } = useCounter();
 
@@ -28,17 +15,17 @@ export default function App(props) {
       <p>{value}</p>
 
       <div className="button--row">
-        <button class="button" onClick={Increment}>
-          Increment Counter
-        </button>
-        <button
-          className="button"
+        <CustomButton onClick={Increment}>
+          <p>Increment</p>
+        </CustomButton>
+
+        <CustomButton
           onClick={() => {
             setMessage('Me Too!');
           }}
         >
           I love Preact
-        </button>
+        </CustomButton>
       </div>
     </div>
   );
